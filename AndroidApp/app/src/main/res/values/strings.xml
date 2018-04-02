@@ -8,6 +8,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="address_subtitle">My Account</string>
+
+    <string name="type_the_recipe_address">Paste address of recipient or scan QR-Code</string>
 
     <string name="default_key_password">default</string>
 

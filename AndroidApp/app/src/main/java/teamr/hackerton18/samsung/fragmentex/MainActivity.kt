@@ -8,16 +8,19 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.nav_header_main.*
 import org.jetbrains.anko.AnkoLogger
 import teamr.hackerton18.samsung.fragmentex.keystore.KeyStoreWeb3j
 import android.widget.TextView
 import org.jetbrains.anko.info
-import org.jetbrains.anko.sdk25.coroutines.onClick
+import teamr.hackerton18.samsung.fragmentex.manager.MyAccountManager
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.support.design.widget.Snackbar
+import android.widget.ImageView
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, AnkoLogger {
@@ -42,10 +45,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val navigationView = findViewById<View>(R.id.nav_view) as NavigationView
         val hView = navigationView.getHeaderView(0)
         val navAccountAddress = hView.findViewById(R.id.accountAddress) as TextView
-        navAccountAddress.setText(keyStore.getKeyByIndex(0))
+        navAccountAddress.setText(MyAccountManager.addressHash)
 
         val navAccountBalance = hView.findViewById(R.id.accountBalance) as TextView
-        navAccountBalance.setText("11.0 ETH")
+        navAccountBalance.setText(MyAccountManager.balance.toString() + " ETH")
+
+
+        //val navImage = hView.findViewById(R.id.accountImageView) as ImageView
 
         /*
         val navImage = hView.findViewById(R.id.accountImageView) as ImageView
@@ -57,10 +63,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val navLayout = hView.findViewById(R.id.accountLayout) as LinearLayout
         navLayout.setOnClickListener(View.OnClickListener {
-            ShowAccountFragment();
+
+            ShowAccountFragment()
             drawer_layout.closeDrawer(GravityCompat.START)
         })
 
+        navLayout.setOnLongClickListener( View.OnLongClickListener {
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("Copied Text", MyAccountManager.addressHash)
+            clipboard.primaryClip = clip
+
+            Snackbar.make(it, "Copied to clipboard.", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show()
+
+            true
+        })
         /*
         info(filesDir);
         val list = fileList()
@@ -104,7 +121,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         */
         //ShowAccountListFragment()
 
-/*
+        /*
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()

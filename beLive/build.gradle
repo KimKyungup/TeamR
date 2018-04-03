@@ -2,6 +2,9 @@
 
 buildscript {
     ext.kotlin_version = '1.2.31'
+    ext.anko_version = '0.10.4'         //anko
+    ext.arch_version = "1.0.0-alpha4"  //kodein
+
     repositories {
         google()
         jcenter()
@@ -17,8 +20,10 @@ buildscript {
 
 allprojects {
     repositories {
+        maven { url 'https://maven.google.com' }
         google()
         jcenter()
+        maven { url 'https://jitpack.io' }
     }
 }
 

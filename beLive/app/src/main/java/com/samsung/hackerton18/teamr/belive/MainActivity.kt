@@ -1,19 +1,28 @@
 package com.samsung.hackerton18.teamr.belive
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import com.samsung.hackerton18.teamr.belive.data.AppDatabase
 import com.samsung.hackerton18.teamr.belive.fragment.*
+import com.samsung.hackerton18.teamr.belive.web3j.KeyStore
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_main.*	//custom navigation
 
+import com.github.salomonbrys.kodein.LazyKodein
+import com.github.salomonbrys.kodein.android.appKodein
+import com.github.salomonbrys.kodein.instance
+
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    private val appDatabase: AppDatabase by LazyKodein(appKodein).instance()
+    private val keyStore: KeyStore by LazyKodein(appKodein).instance()
+    private val myManager: MyManager by LazyKodein(appKodein).instance()
 
     val manager = supportFragmentManager    // Show Fragments
 
@@ -21,7 +30,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
+        
+        myManager.init()  //Manager can deal with account
 //      There is no Global FAB. In each fragment, It will be managed.
 //        fab.setOnClickListener { view ->
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -34,6 +44,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        val showAccount = View.OnClickListener(){
+            showAccountFragment()
+            drawer_layout.closeDrawer(GravityCompat.START)
+        }
+        nav_user.setOnClickListener(showAccount)
+        nav_balance.setOnClickListener(showAccount)
+        nav_email.setOnClickListener(showAccount)
+
 
 	//<For Custom Navigation Menu
         menu_exit.setOnClickListener {
@@ -77,6 +96,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     //<Show Fragments
+    private fun showAccountFragment(){
+        val transaction = manager.beginTransaction()
+        val fragment = AccountFragment()
+
+        transaction.replace(R.id.fragmentHolder,fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
     private fun showNewContractFragment(){
         val transaction = manager.beginTransaction()
         val fragment = NewContractFragment()

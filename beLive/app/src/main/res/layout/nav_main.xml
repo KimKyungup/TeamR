@@ -31,7 +31,7 @@
             android:id="@+id/linearLayout">
 
             <RelativeLayout
-                android:id="@+id/user"
+                android:id="@+id/nav_user"
                 android:layout_width="match_parent"
                 android:layout_height="123dp"
                 android:orientation="horizontal">

@@ -8,4 +8,13 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    //account fragment
+    <string name="your_address">Address : </string>
+    <string name="your_balance">Balance : </string>
+    <string name="type_the_recipe_address">Paste address of recipient or scan QR-Code</string>
+    <string name="create_tx_please_specify_amount">Please specify the amount</string>
+    <string name="create_transation_to_label">To:</string>
+    <string name="create_transation_from_label">From:</string>
+    <string name="create_tx_amount">Amount:</string>
 </resources>

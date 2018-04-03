@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt' //room
+
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -13,6 +15,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -32,4 +35,32 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+
+    //room
+    compile "android.arch.lifecycle:extensions:$arch_version"
+    compile "android.arch.persistence.room:runtime:$arch_version"
+    kapt "android.arch.persistence.room:compiler:$arch_version"
+
+    //Anko
+    compile "org.jetbrains.anko:anko:$anko_version"
+
+    //web3j
+    compile "org.web3j:core:3.3.1-android"
+
+    //kodein
+    compile 'com.github.salomonbrys.kodein:kodein:4.1.0'
+    compile 'com.github.salomonbrys.kodein:kodein-android:4.1.0'
+    //compile 'org.kodein.di:kodein-di-generic-jvm:5.0.0'       //dependency error -_-;
+    //compile 'org.kodein.di:kodein-di-framework-android:5.0.0'
+}
+
+// coroutines
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
+androidExtensions {
+    experimental = true
 }

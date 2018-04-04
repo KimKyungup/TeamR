@@ -5,14 +5,22 @@ import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 
-@Entity(tableName = "contractTx")
+@Entity(tableName = "contractTx", primaryKeys = ["timeStamp", "fromAddress", "toAddress"])
 data class ContractTxEntity(
-        @PrimaryKey
         var hash: String,
+
+        var timeStamp: Long,
+
+        var fromAddress: String,
+
+        var toAddress: String,
+
+        var category: String,
 
         var note: String,
 
-        var date: String,
+        @ColumnInfo(name = "pending -> ")
+        var status: String,
 
-        var category: String
+        var jsonData: String
 )

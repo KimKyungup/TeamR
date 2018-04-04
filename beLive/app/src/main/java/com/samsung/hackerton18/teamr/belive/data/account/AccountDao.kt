@@ -14,7 +14,7 @@ import android.arch.persistence.room.OnConflictStrategy.REPLACE
     @Query("SELECT * FROM account WHERE address = :address")
     fun loadByAddress(address:String): List<AccountEntity>
 
-    @Insert(onConflict = REPLACE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun upsertAccount(account : AccountEntity)
 
     @Delete

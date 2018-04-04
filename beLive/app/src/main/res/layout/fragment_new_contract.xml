@@ -35,6 +35,7 @@
                 android:background="#000000" />
 
             <LinearLayout
+                android:id = "@+id/tts_contract"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">

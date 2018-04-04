@@ -5,76 +5,108 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.samsung.hackerton18.teamr.belive.fragment.smartContract.TTS_ContractFragment">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:background="#ffffff">
 
+        <View
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="20dp"
+            android:background="#000000" />
+
         <LinearLayout
+            android:layout_weight="1"
+            android:layout_height="fill_parent"
             android:id="@+id/contract"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:background="#ffffff"
             android:orientation="vertical"
             android:layout_centerInParent="true">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="20dp"
-                android:background="#000000" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
+                android:layout_height="match_parent">
                 <LinearLayout
-                    android:id="@+id/contract_tts"
+                    android:layout_alignParentBottom="true"
                     android:layout_marginLeft="32px"
                     android:layout_marginRight="32px"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/contractSentence"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="I Want to send a Text"
+                        android:textColor="#000000"
+                        android:textSize="40sp" />
+
+                    <EditText
+                        android:id="@+id/textToSend"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:textColor="#000000"
+                        android:textSize="30sp" />
+                </LinearLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="20dp"
+            android:background="#000000" />
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true">
+                <LinearLayout
+                    android:layout_marginLeft="32px"
+                    android:layout_marginRight="32px"
+                    android:layout_alignParentTop="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
                     <TextView
                         android:id="@+id/contract_contents"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Write a text for the speaker can speak"
+                        android:text="for speaking TTS."
                         android:textColor="#000000"
-                        android:textSize="20sp" />
-                    <TextView
-                        android:id="@+id/contract_note"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Closing date I Mar 27, 2019"
-                        android:textColor="#000000"
-                        android:textSize="13sp" />
-                    <TextView
-                        android:id="@+id/creator"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Created by kup.kim"
-                        android:textColor="#000000"
-                        android:textSize="13sp" />
+                        android:textSize="40sp" />
                 </LinearLayout>
-            </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="20dp"
-                android:background="#000000" />
+            </RelativeLayout>
+        </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"></LinearLayout>
-            </LinearLayout>
-    </RelativeLayout>
+
+
+    </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -82,5 +114,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_add_black_24dp" />
+        app:srcCompat="@drawable/ic_action_done" />
 </FrameLayout>

@@ -6,6 +6,7 @@ import com.github.salomonbrys.kodein.*
 import com.github.salomonbrys.kodein.android.appKodein
 import com.samsung.hackerton18.teamr.belive.data.AppDatabase
 import com.samsung.hackerton18.teamr.belive.web3j.KeyStore
+import com.samsung.hackerton18.teamr.belive.web3j.SmartContract
 
 open class MyApp : Application(), KodeinAware {
 
@@ -17,9 +18,10 @@ open class MyApp : Application(), KodeinAware {
 
     open fun createKodein(): Kodein.Module{
         return Kodein.Module{
-            bind<AppDatabase>() with singleton { Room.databaseBuilder(applicationContext, AppDatabase::class.java, "maindb0").build() }
+            bind<AppDatabase>() with singleton { Room.databaseBuilder(applicationContext, AppDatabase::class.java, "maindb").build() }
             bind<KeyStore>() with singleton { KeyStore(applicationContext)}
             bind<MyManager>() with singleton { MyManager(instance(),instance())}
+            bind<SmartContract>() with singleton{SmartContract(instance(),instance())}
         }
     }
 }

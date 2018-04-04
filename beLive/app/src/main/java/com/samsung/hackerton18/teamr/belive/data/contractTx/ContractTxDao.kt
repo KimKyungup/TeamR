@@ -15,10 +15,13 @@ import android.arch.persistence.room.OnConflictStrategy.REPLACE
     @Query("SELECT * FROM contractTx WHERE \"to\" = :hash")
     fun loadByHash(hash:String): List<ContractTxEntity>
 
-    @Insert(onConflict = REPLACE)
-    fun insertTx(contractTx : ContractTxEntity)
+    @Query("SELECT * FROM contractTx WHERE \"timeStamp\" = :timeStamp")
+    fun loadByTimeStamp(timeStamp:String): List<ContractTxEntity>
 
-    @Update(onConflict = REPLACE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun upsert(contractTx : ContractTxEntity)
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateTx(contractTx : ContractTxEntity)
 
     @Delete

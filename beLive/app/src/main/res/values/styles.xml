@@ -21,6 +21,9 @@
         <item name="colorControlNormal">@color/colorBlack</item>
         <item name="android:textColor">@color/colorBlack</item>
     </style>
+    <!--test-->
+    <!--<item name="displayOptions">useLogo|showHome</item>-->
+    <!--<item name="logo">@drawable/logo_286x48</item>-->
     <!--For Custom Action Bar>-->
 
 

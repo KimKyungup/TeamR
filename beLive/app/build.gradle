@@ -21,6 +21,34 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            //SET APK FILE NAME
+//            applicationVariants.all { variant ->
+//                variant.outputs.each { output ->
+//                    project.ext { appName = 'beLive' }
+//                    def formattedDate = new Date().format('yyyyMMddHHmmss')
+//                    def newName = output.outputFile.name
+//                    newName = newName.replace("app-", "$project.ext.appName-") //"MyAppName" -> I set my app variables in the root project
+//                    newName = newName.replace("-release", "-release" + formattedDate)
+//                    //noinspection GroovyAssignabilityCheck
+//                    output.outputFileName = new File(output.outputFile.parent, newName)
+//                }
+//            }
+
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def formattedDate = new Date().format('yyyyMMddHHmmss')
+                    output.outputFileName = new File(output.outputFile.name.replace("app-release.apk", "beLive-"+formattedDate+".apk"))
+                }
+            }
+        }
+        debug{
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def formattedDate = new Date().format('yyyyMMddHHmmss')
+                    output.outputFileName = new File(output.outputFile.name.replace("app-debug.apk", "beLive-debug-"+formattedDate+".apk"))
+                }
+            }
         }
     }
 }

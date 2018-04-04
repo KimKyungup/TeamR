@@ -30,10 +30,10 @@ import android.arch.persistence.room.OnConflictStrategy.REPLACE
     @Query("SELECT * FROM tx WHERE hash = :hash")
     fun loadByHash(hash:String): List<TxEntity>
 
-    @Insert(onConflict = REPLACE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTx(tx : TxEntity)
 
-    @Update(onConflict = REPLACE)
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateTx(tx : TxEntity)
 
     @Delete

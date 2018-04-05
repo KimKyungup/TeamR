@@ -35,21 +35,21 @@ android {
 //                }
 //            }
 
-            applicationVariants.all { variant ->
-                variant.outputs.each { output ->
-                    def formattedDate = new Date().format('yyyyMMddHHmmss')
-                    output.outputFileName = new File(output.outputFile.name.replace("app-release.apk", "beLive-"+formattedDate+".apk"))
-                }
-            }
+//            applicationVariants.all { variant ->
+//                variant.outputs.each { output ->
+//                    def formattedDate = new Date().format('yyyyMMddHHmmss')
+//                    output.outputFileName = new File(output.outputFile.name.replace("app-release.apk", "beLive-"+formattedDate+".apk"))
+//                }
+//            }
         }
-        debug{
-            applicationVariants.all { variant ->
-                variant.outputs.each { output ->
-                    def formattedDate = new Date().format('yyyyMMddHHmmss')
-                    output.outputFileName = new File(output.outputFile.name.replace("app-debug.apk", "beLive-debug-"+formattedDate+".apk"))
-                }
-            }
-        }
+//        debug{
+//            applicationVariants.all { variant ->
+//                variant.outputs.each { output ->
+//                    def formattedDate = new Date().format('yyyyMMddHHmmss')
+//                    output.outputFileName = new File(output.outputFile.name.replace("app-debug.apk", "beLive-debug-"+formattedDate+".apk"))
+//                }
+//            }
+//        }
     }
 }
 

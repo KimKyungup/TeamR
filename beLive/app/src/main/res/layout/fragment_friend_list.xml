@@ -4,10 +4,99 @@
     android:layout_height="match_parent"
     tools:context="com.samsung.hackerton18.teamr.belive.fragment.FriendListFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="friendList" />
+        android:orientation="vertical"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="#ffffff">
+
+        <View
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="20dp"
+            android:background="#000000" />
+
+        <LinearLayout
+            android:layout_weight="4"
+            android:layout_height="fill_parent"
+            android:id="@+id/contract"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="#ffffff"
+            android:orientation="vertical"
+            android:layout_centerInParent="true">
+
+
+            <RelativeLayout
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/friendlist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="friend list"
+                    android:textColor="#000000"
+                    android:textSize="30sp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="20dp"
+            android:background="#000000" />
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_centerInParent="true">-->
+                <!--<LinearLayout-->
+                    <!--android:layout_marginLeft="32px"-->
+                    <!--android:layout_marginRight="32px"-->
+                    <!--android:layout_alignParentTop="true"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:orientation="vertical">-->
+
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/contract_contents"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="for speaking TTS."-->
+                        <!--android:textColor="#000000"-->
+                        <!--android:textSize="40sp" />-->
+                <!--</LinearLayout>-->
+
+            <!--</RelativeLayout>-->
+        </LinearLayout>
+
+
+
+    </LinearLayout>
 
 </FrameLayout>

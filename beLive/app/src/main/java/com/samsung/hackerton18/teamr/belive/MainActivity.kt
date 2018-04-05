@@ -76,12 +76,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 //        setCurrentAccountObserver()
 
-        //showHistoryFragment()
-        val transaction = manager.beginTransaction()
-        val fragment = HistoryFragment()
-        transaction.replace(R.id.fragmentHolder,fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
+        showHistoryFragment()
+//        val transaction = manager.beginTransaction()
+//        val fragment = LogoFragment()
+//        transaction.replace(R.id.fragmentHolder,fragment)
+//        //transaction.add(fragment, "ImmersiveModeFragment");
+//        transaction.commit()
+
+//        val uiOptions = window.decorView.systemUiVisibility
+//        val newUiOptions = uiOptions xor  View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+//        window.decorView.systemUiVisibility = newUiOptions
 
 
 //      There is no Global FAB. In each fragment, It will be managed.

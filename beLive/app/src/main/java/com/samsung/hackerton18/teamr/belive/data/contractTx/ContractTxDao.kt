@@ -7,7 +7,7 @@ import android.arch.persistence.room.OnConflictStrategy.REPLACE
 @Dao interface ContractTxDao {
 
     @Query("SELECT * FROM contractTx")
-    fun loadAllLiveData(): LiveData<ContractTxEntity>
+    fun loadAllLiveData(): LiveData<List<ContractTxEntity>>
 
     @Query("SELECT * FROM contractTx")
     fun loadAll(): List<ContractTxEntity>

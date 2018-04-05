@@ -10,7 +10,7 @@ import com.samsung.hackerton18.teamr.belive.data.contractTx.ContractTxEntity
 import teamr.hackerton18.samsung.fragmentex.data.transaction.TxEntity
 import teamr.hackerton18.samsung.fragmentex.data.transaction.TxDao
 
-@Database(entities = [AccountEntity::class, ContractTxEntity::class, TxEntity::class], version= 1, exportSchema=false ) //version must be >=1
+@Database(entities = [AccountEntity::class, ContractTxEntity::class, TxEntity::class], version= 3, exportSchema=false ) //version must be >=1
 @TypeConverters(RoomTypeConverters::class)
 abstract class AppDatabase : RoomDatabase()  {
 

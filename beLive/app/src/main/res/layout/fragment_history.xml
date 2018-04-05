@@ -5,60 +5,28 @@
     tools:context="com.samsung.hackerton18.teamr.belive.fragment.HistoryFragment">
 
     <LinearLayout
-        android:id="@+id/contract_item1"
-        android:layout_marginTop="66px"
-        android:layout_marginBottom="78px"
-        android:layout_marginLeft="32px"
-        android:layout_marginRight="32px"
+        android:id="@+id/contract"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#ffffff"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/contract_contents1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Transfer 20 ETH to my mother every month on the 23rd"
-            android:textColor="#000000"
-            android:textSize="20sp" />
-        <TextView
-            android:id="@+id/closing_date1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Closing date I Mar 27, 2019"
-            android:textColor="#000000"
-            android:textSize="13sp" />
-        <RelativeLayout
-            android:layout_marginTop="29px"
-            android:layout_width="match_parent"
-            android:layout_height="124px"
-            android:background="#ffffff">
 
-            <ImageView
-                android:id="@+id/noteicon1"
-                android:layout_width="80px"
-                android:layout_height="80px"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="17dp"
-                android:src="@drawable/icon_bill_113x124" />
-            <TextView
-                android:id="@+id/registtime1"
-                android:layout_toRightOf="@+id/noteicon1"
-                android:layout_centerVertical="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1hour ago"
-                android:textColor="#000000"
-                android:textSize="13sp" />
-            <ImageView
-                android:id="@+id/like1"
-                android:layout_alignParentRight="true"
-                android:layout_width="124px"
-                android:layout_height="124px"
-                android:src="@drawable/img_pic_1_124x124" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="30dp"
+        android:background="#000000" />
 
-        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
     </LinearLayout>
 
 </FrameLayout>

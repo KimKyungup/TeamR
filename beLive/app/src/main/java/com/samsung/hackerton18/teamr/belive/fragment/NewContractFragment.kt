@@ -31,6 +31,8 @@ class NewContractFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (activity as MainActivity).supportActionBar?.subtitle = "New Contract"
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         tts_contract.onClick {
             (activity as MainActivity).showTTS_ContractFragment()

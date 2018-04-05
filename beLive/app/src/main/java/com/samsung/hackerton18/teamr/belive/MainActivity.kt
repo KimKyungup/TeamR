@@ -1,5 +1,7 @@
 package com.samsung.hackerton18.teamr.belive
 
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.Observer
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -22,18 +24,42 @@ import kotlinx.android.synthetic.main.nav_main.*	//custom navigation
 import com.github.salomonbrys.kodein.LazyKodein
 import com.github.salomonbrys.kodein.android.appKodein
 import com.github.salomonbrys.kodein.instance
+import com.samsung.hackerton18.teamr.belive.data.account.AccountEntity
 import com.samsung.hackerton18.teamr.belive.fragment.smartContract.TTS_ContractFragment
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.delay
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
+import java.math.BigInteger
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, AnkoLogger {
     private val appDatabase: AppDatabase by LazyKodein(appKodein).instance()
     private val keyStore: KeyStore by LazyKodein(appKodein).instance()
     private val myManager: MyManager by LazyKodein(appKodein).instance()
 
+//    private var accountLiveData : LiveData<AccountEntity>? = null
+
     val manager = supportFragmentManager    // Show Fragments
+
+    //    Test Code
+//    private fun setCurrentAccountObserver(){
+//        val currentAccount = myManager.myAccount
+//        if(currentAccount != null)
+//        {
+//            accountLiveData?.removeObserver(accountObserver)
+//            accountLiveData = appDatabase.accountDao().loadByAddressLive(currentAccount.address)
+//            accountLiveData?.observe(this, accountObserver)
+//        }
+//    }
+//
+//    private val accountObserver = Observer<AccountEntity> {
+//        if (it != null) {
+//            info("Account is updated. balance=${it.balance}")
+//        } else {
+//            info("Account is updated. but No Data")
+//        }
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +74,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         myManager.init()  //Manager can deal with account
         myManager.balanceUpdator()
 
+//        setCurrentAccountObserver()
+
+        //showHistoryFragment()
+        val transaction = manager.beginTransaction()
+        val fragment = HistoryFragment()
+        transaction.replace(R.id.fragmentHolder,fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+
+
 //      There is no Global FAB. In each fragment, It will be managed.
 //        fab.setOnClickListener { view ->
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -56,17 +92,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         updateNavigationMenuUIThread()
 
-        nav_user_address.setOnLongClickListener {
-            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            try {
-                val clip = ClipData.newPlainText("Copied Text", myManager.myAccount.address)
-                clipboard.primaryClip = clip
-                Snackbar.make(it, "Copied to clipboard.", Snackbar.LENGTH_LONG).setAction("Action", null).show()
-            }catch(e:Exception){
-                e.printStackTrace()
-            }
-            true
-        }
+//        nav_user_address.setOnLongClickListener {
+//            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+//            try {
+//                val clip = ClipData.newPlainText("Copied Text", myManager.myAccount.address)
+//                clipboard.primaryClip = clip
+//                Snackbar.make(it, "Copied to clipboard.", Snackbar.LENGTH_LONG).setAction("Action", null).show()
+//            }catch(e:Exception){
+//                e.printStackTrace()
+//            }
+//            true
+//        }
 
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
@@ -75,13 +111,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         nav_view.setNavigationItemSelectedListener(this)
 
-        val showAccount = View.OnClickListener(){
-            showAccountFragment()
-            drawer_layout.closeDrawer(GravityCompat.START)
+        val copyAddress = View.OnClickListener(){
+//            showAccountFragment()
+//            drawer_layout.closeDrawer(GravityCompat.START)
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            try {
+                val clip = ClipData.newPlainText("Copied Text", myManager.myAccount.address)
+                clipboard.primaryClip = clip
+                Snackbar.make(it, "Your public account is copied.", Snackbar.LENGTH_LONG).setAction("Action", null).show()
+            }catch(e:Exception){
+                e.printStackTrace()
+            }
+
         }
-        nav_user_image.setOnClickListener(showAccount)
-        nav_balance.setOnClickListener(showAccount)
-        nav_email.setOnClickListener(showAccount)
+        //nav_user_image.setOnClickListener(copyAddress)
+        nav_balance.setOnClickListener(copyAddress)
+        nav_user_address.setOnClickListener(copyAddress)
+        //nav_email.setOnClickListener(copyAddress)
+
 
 
 	//<For Custom Navigation Menu

@@ -35,9 +35,9 @@ class SmartContract(private val appDatabase: AppDatabase, private val myManager:
                             currentSeconds,
                             myManager.myAccount.address,
                             ttsContractHash,
-                            "",
-                            "",
-                            "",
+                            "tts",
+                            text,
+                            "pending",
                             "")
 
                     appDatabase.contractTxDao().upsert(tx)
@@ -46,6 +46,7 @@ class SmartContract(private val appDatabase: AppDatabase, private val myManager:
                     val result = contract.setNewOrder(text).sendAsync().get()
                     info("got result tx hash: ${result.transactionHash}")
                     tx.hash = result.transactionHash;
+                    tx.status = "Complete"
                     appDatabase.contractTxDao().upsert(tx)
                     info("Update DB")
                 }

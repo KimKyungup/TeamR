@@ -32,7 +32,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="123dp"
+                android:layout_height="70dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -41,6 +41,18 @@
                     android:layout_height="match_parent"
                     android:layout_alignParentStart="true"
                     app:srcCompat="@drawable/img_pic_1_124x124" />
+
+                <TextView
+                    android:id="@+id/nav_user_name"
+                    android:layout_toEndOf="@id/nav_user_image"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kim Kyungup"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+
 
                 <ImageView
                     android:id="@+id/menu_exit"
@@ -53,16 +65,6 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/nav_user_address"
-                android:clickable="true"
-                android:layout_marginTop="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="0xNoInit484436cc65327794cD1B12f085bea618a"
-                android:textColor="@android:color/white"
-                android:textSize="12sp" />
-
-            <TextView
                 android:id="@+id/nav_balance"
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
@@ -72,13 +74,16 @@
                 android:textSize="25sp" />
 
             <TextView
-                android:id="@+id/nav_email"
+                android:id="@+id/nav_user_address"
+                android:clickable="true"
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="nogangbaby@gmail.com"
+                android:singleLine="true"
+                android:text="0xNoInit484436cc65327794cD1B12f085bea618a"
                 android:textColor="@android:color/white"
-                android:textSize="12sp" />
+                android:textSize="20sp" />
+
             <View
                 android:layout_marginTop="20dp"
                 android:background="#ffffff"

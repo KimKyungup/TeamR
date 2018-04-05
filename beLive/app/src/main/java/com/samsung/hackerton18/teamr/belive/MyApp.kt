@@ -18,7 +18,7 @@ open class MyApp : Application(), KodeinAware {
 
     open fun createKodein(): Kodein.Module{
         return Kodein.Module{
-            bind<AppDatabase>() with singleton { Room.databaseBuilder(applicationContext, AppDatabase::class.java, "maindb").build() }
+            bind<AppDatabase>() with singleton { Room.databaseBuilder(applicationContext, AppDatabase::class.java, "maindb3").build() }
             bind<KeyStore>() with singleton { KeyStore(applicationContext)}
             bind<MyManager>() with singleton { MyManager(instance(),instance())}
             bind<SmartContract>() with singleton{SmartContract(instance(),instance())}

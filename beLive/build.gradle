@@ -3,7 +3,7 @@
 buildscript {
     ext.kotlin_version = '1.2.31'
     ext.anko_version = '0.10.4'         //anko
-    ext.arch_version = "1.0.0-alpha4"  //kodein
+    ext.arch_version = "1.0.0"  //kodein
 
     repositories {
         google()

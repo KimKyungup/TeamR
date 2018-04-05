@@ -37,6 +37,9 @@ class AccountFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (activity as MainActivity).supportActionBar?.subtitle = "Account"
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         myBalance.text = myManager.balanceString + " ETH"
         myAddressHash.text = myManager.myAccount.address
 

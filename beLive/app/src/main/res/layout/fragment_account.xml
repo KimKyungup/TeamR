@@ -29,39 +29,48 @@
                 android:layout_marginBottom="30dp"
                 android:background="#000000" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginBottom="30dp">
 
                 <LinearLayout
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="30dp"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="20sp"
+                        android:text="[My Address]"
                         android:textColor="@color/colorBlack"
-                        android:text="[My Address]"/>
+                        android:textStyle="bold"
+                        android:textSize="20sp" />
+
                     <TextView
                         android:id="@+id/myAddressHash"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="12sp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:singleLine="false"
+                        android:text="0xNoInit7484436cc65327794cD1B12f085bea618a"
                         android:textColor="@color/colorBlack"
-                        android:text="0xAf44747484436cc65327794cD1B12f085bea618a"/>
+                        android:textSize="16sp"
+                        android:textStyle="normal"/>
                 </LinearLayout>
 
-                <Button
+                <ImageView
                     android:id="@+id/btn_to_copy"
-                    android:layout_width="wrap_content"
+                    android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:textSize="10sp"
-                    android:text="copy" />
-
-            </LinearLayout>
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_content_copy" />
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -76,19 +85,20 @@
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:textColor="@color/colorBlack"
-                android:text="10.5 ETH" />
+                android:text="0.0 ETH" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"
-                android:background="#000000" />
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:layout_marginTop="30dp"-->
+                <!--android:layout_marginBottom="30dp"-->
+                <!--android:background="#000000" />-->
         </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp">
 
@@ -98,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
                 android:textColor="@color/colorBlack"
-                android:text="Send ETH"/>
+                android:text="[Send ETH]"/>
 
             <TextView
                 android:layout_below = "@id/SendEtherText"

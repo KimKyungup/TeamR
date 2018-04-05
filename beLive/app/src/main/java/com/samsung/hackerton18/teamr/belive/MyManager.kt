@@ -90,19 +90,24 @@ class MyManager(private val appDatabase:AppDatabase, private val keyStore: KeySt
         async(UI) {
             while (true) {
                 try {
-                    val web3 = async(CommonPool){Web3jFactory.build(HttpService("https://rinkeby.infura.io/gGHwulfhVK8ouWn8aZMz"))}.await()
-                    val ethGetBalance = async(CommonPool){web3.ethGetBalance(myAccount.address, DefaultBlockParameterName.LATEST).sendAsync().get()}.await()
-                    val ether = Convert.fromWei(ethGetBalance.balance.toString(), Convert.Unit.ETHER)
+                    if(flagInit) {
+                        val web3 = async(CommonPool) { Web3jFactory.build(HttpService("https://rinkeby.infura.io/gGHwulfhVK8ouWn8aZMz")) }.await()
+                        val ethGetBalance = async(CommonPool) { web3.ethGetBalance(myAccount.address, DefaultBlockParameterName.LATEST).sendAsync().get() }.await()
+                        val ether = Convert.fromWei(ethGetBalance.balance.toString(), Convert.Unit.ETHER)
 
-                    if (myAccount.balance != ethGetBalance.balance) {
-                        myAccount.balance = ethGetBalance.balance
-                        balanceString = ether.toString()
+                        if (myAccount.balance != ethGetBalance.balance) {
+                            myAccount.balance = ethGetBalance.balance
+                            balanceString = ether.toString()
 
-                        async(CommonPool){appDatabase.accountDao().upsertAccount(myAccount)}.await()
+                            async(CommonPool) { appDatabase.accountDao().upsertAccount(myAccount) }.await()
+                        }
+
+                        info("Balance is Updated. balance:${ether.toString()}")
+                        delay(10000)
                     }
-
-                    info("Balance is Updated. balance:${ether.toString()}")
-                    delay(10000)
+                    else{
+                        delay(3000)
+                    }
                 }catch(e:Exception){
                     e.printStackTrace()
                 }

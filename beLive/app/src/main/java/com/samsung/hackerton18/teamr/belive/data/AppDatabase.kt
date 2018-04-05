@@ -7,10 +7,12 @@ import com.samsung.hackerton18.teamr.belive.data.account.AccountDao
 import com.samsung.hackerton18.teamr.belive.data.account.AccountEntity
 import com.samsung.hackerton18.teamr.belive.data.contractTx.ContractTxDao
 import com.samsung.hackerton18.teamr.belive.data.contractTx.ContractTxEntity
+import com.samsung.hackerton18.teamr.belive.data.friend.FriendDao
+import com.samsung.hackerton18.teamr.belive.data.friend.FriendEntity
 import teamr.hackerton18.samsung.fragmentex.data.transaction.TxEntity
 import teamr.hackerton18.samsung.fragmentex.data.transaction.TxDao
 
-@Database(entities = [AccountEntity::class, ContractTxEntity::class, TxEntity::class], version= 3, exportSchema=false ) //version must be >=1
+@Database(entities = [AccountEntity::class, ContractTxEntity::class, TxEntity::class, FriendEntity::class], version= 4, exportSchema=false ) //version must be >=1
 @TypeConverters(RoomTypeConverters::class)
 abstract class AppDatabase : RoomDatabase()  {
 
@@ -19,4 +21,6 @@ abstract class AppDatabase : RoomDatabase()  {
     abstract fun accountDao() : AccountDao
 
     abstract fun contractTxDao() : ContractTxDao
+
+    abstract fun friendDao() : FriendDao
 }

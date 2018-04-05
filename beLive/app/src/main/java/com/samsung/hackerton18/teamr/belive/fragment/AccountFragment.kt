@@ -53,6 +53,6 @@ class AccountFragment : Fragment() {
                 e.printStackTrace()
             }
         }
-
     }
+
 }// Required empty public constructor

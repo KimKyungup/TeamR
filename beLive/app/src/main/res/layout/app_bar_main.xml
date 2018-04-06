@@ -5,24 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.samsung.hackerton18.teamr.belive.MainActivity">
-
-    <android.support.design.widget.AppBarLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:elevation="0dp">
-        <!--elevation is defined for removing seperator bar of UI-->
+        android:background="#ffffff">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <LinearLayout
+            android:id="@+id/history"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_height="match_parent"
+            android:layout_marginLeft="40dp"
+            android:background="#ffffff"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            >
 
-    </android.support.design.widget.AppBarLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/title" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="2dp"
+                android:background="#000000" />
 
-    <include layout="@layout/content_main" />
+            <include layout="@layout/content_main" />
 
+        </LinearLayout>
+    </RelativeLayout>
     <!-- Delete All FAB, In Fragment, We will manage FABs.
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

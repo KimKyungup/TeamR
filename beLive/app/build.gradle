@@ -82,6 +82,8 @@ dependencies {
     implementation 'com.github.salomonbrys.kodein:kodein-android:4.1.0'
     //compile 'org.kodein.di:kodein-di-generic-jvm:5.0.0'       //dependency error -_-;
     //compile 'org.kodein.di:kodein-di-framework-android:5.0.0'
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+
 }
 
 // coroutines

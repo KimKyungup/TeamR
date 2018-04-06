@@ -73,9 +73,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        startActivity(Intent(this, SplashActivity::class.java))
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+        //setSupportActionBar(toolbar)
 
         //test
         //supportActionBar!!.setLogo(R.drawable.logo_520x87)
@@ -149,13 +151,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 //            true
 //        }
 
-        val toggle = ActionBarDrawerToggle(
+        /*
+	val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
-
+	*/
         val copyAddress = View.OnClickListener(){
 //            showAccountFragment()
 //            drawer_layout.closeDrawer(GravityCompat.START)

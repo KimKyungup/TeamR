@@ -32,6 +32,7 @@ import kotlinx.coroutines.experimental.newFixedThreadPoolContext
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.support.v4.alert
 
 
 /**
@@ -71,19 +72,38 @@ class FriendListFragment : Fragment() , AnkoLogger, DefaultSelectionOnClickListe
 //    }
 
     override fun defaultSelectionOnClick(idx:Int){
-        //Todo: CAll Edit Fragment
-        Snackbar.make(view!!, "Click ${idx} item.", Snackbar.LENGTH_LONG).setAction("Action", null).show()
+        //Snackbar.make(view!!, "Click ${idx} item.", Snackbar.LENGTH_LONG).setAction("Action", null).show()
 
+        val fragment = EditFriendFragment()
+        val arguments = Bundle()
+        arguments.putInt("index", idx)
+        fragment.arguments = arguments
+        val tr = fragmentManager.beginTransaction()
+        tr.replace(R.id.fragmentHolder, fragment)
+        tr.addToBackStack(fragment.javaClass.name)
+        tr.commit()
     }
 
     override fun defaultSelectionOnLongClick(idx: Int): Boolean {
-        Snackbar.make(view!!, "Long Click ${idx} item.", Snackbar.LENGTH_LONG).setAction("Action", null).show()
-        async(UI){
-            async(CommonPool){
-                appDatabase.friendDao().deleteAcount(friendEntityList[idx])
-            }
-        }
+        //Snackbar.make(view!!, " ${idx} item.", Snackbar.LENGTH_LONG).setAction("Action", null).show()
+        alert("Would you like to remove it?","Remove"){
+            positiveButton("Yes"){
 
+                Snackbar.make(view!!, " ${friendEntityList[idx].name} is removed.", Snackbar.LENGTH_LONG).setAction("Action", null).show()
+
+                async(UI){
+                    async(CommonPool){
+                        appDatabase.friendDao().deleteAcount(friendEntityList[idx])
+                    }
+                }
+
+
+            }
+
+            negativeButton("No"){
+
+            }
+        }.show()
         return true
     }
 

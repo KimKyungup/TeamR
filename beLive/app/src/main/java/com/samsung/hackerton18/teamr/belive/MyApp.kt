@@ -7,6 +7,7 @@ import com.github.salomonbrys.kodein.android.appKodein
 import com.samsung.hackerton18.teamr.belive.data.AppDatabase
 import com.samsung.hackerton18.teamr.belive.web3j.KeyStore
 import com.samsung.hackerton18.teamr.belive.web3j.SmartContract
+import com.samsung.hackerton18.teamr.belive.web3j.Transfer
 
 open class MyApp : Application(), KodeinAware {
 
@@ -22,6 +23,7 @@ open class MyApp : Application(), KodeinAware {
             bind<KeyStore>() with singleton { KeyStore(applicationContext)}
             bind<MyManager>() with singleton { MyManager(instance(),instance())}
             bind<SmartContract>() with singleton{SmartContract(instance(),instance())}
+            bind<Transfer>() with singleton{Transfer(instance(),instance())}
         }
     }
 }

@@ -41,6 +41,11 @@ class SmartContractViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
                 itemView.contract_sub_content.text = contractTxEntity.note
             }
 
+            "transfer" -> {
+                itemView.contract_content.text = "Transfer " + contractTxEntity.note + " ETH to Mother"
+                itemView.contract_sub_content.text = "instantly"
+            }
+
             else -> {
                 itemView.contract_content.text = "Unknown Contract Transaction"
                 itemView.contract_sub_content.text = "This contract was not categorized."

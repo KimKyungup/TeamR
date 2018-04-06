@@ -1,5 +1,6 @@
 package com.samsung.hackerton18.teamr.belive
 
+import android.arch.lifecycle.Observer
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -33,11 +34,11 @@ import android.support.v4.app.Fragment
 import org.web3j.abi.datatypes.Bool
 import android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT
 import android.view.inputmethod.InputMethodManager
+import kotlinx.android.synthetic.main.fragment_add_friend.*
+import java.math.BigInteger
 
 
-
-
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, AnkoLogger {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, AnkoLogger, AccountBalanceListener{
     private val appDatabase: AppDatabase by LazyKodein(appKodein).instance()
     private val keyStore: KeyStore by LazyKodein(appKodein).instance()
     private val myManager: MyManager by LazyKodein(appKodein).instance()
@@ -65,6 +66,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 //        }
 //    }
 
+    override fun accountBalance(accountHash:String, balance: String) {
+        nav_user_address.text = accountHash
+        nav_balance.text = balance + " ETH"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -77,7 +83,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         myManager.init()  //Manager can deal with account
         myManager.balanceUpdator()
-
+        myManager.setListener(this)
 //        setCurrentAccountObserver()
 
         //showHistoryFragment()
@@ -106,7 +112,29 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 //                    .setAction("Action", null).show()
 //        }
 
-        updateNavigationMenuUIThread()
+        //updateNavigationMenuUIThread()
+
+        appDatabase.friendDao().loadAllLiveData().observe(this, Observer{
+            if(it != null){
+                info("Got new Friend List")
+                val nameList = mutableListOf<String>()
+                for(friend in it){
+                    info("${friend.name}")
+                }
+            }
+        })
+
+        appDatabase.friendDao().loadAllLiveData().observeForever {
+            if(it != null){
+                info("2 Got new Friend List")
+                val nameList = mutableListOf<String>()
+                for(friend in it){
+                    info("2 ${friend.name}")
+                }
+           }
+
+        }
+
 
 //        nav_user_address.setOnLongClickListener {
 //            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager

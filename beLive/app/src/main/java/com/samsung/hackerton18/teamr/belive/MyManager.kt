@@ -17,6 +17,11 @@ import org.web3j.utils.Convert
 import java.math.BigInteger
 import kotlin.concurrent.thread
 
+
+interface AccountBalanceListener {
+    fun accountBalance(accountHash:String, balance:String)
+}
+
 /**
  * Created by up on 2018-04-03.
  */
@@ -31,6 +36,14 @@ class MyManager(private val appDatabase:AppDatabase, private val keyStore: KeySt
         balanceString = Convert.fromWei(myAccount.balance.toString(), Convert.Unit.ETHER).toString()
         credentials = keyStore.getCredentials(myAccount.address)
         flagInit = true
+
+        if(listener != null) listener!!.accountBalance(myAccount.address, balanceString)
+    }
+
+    private var listener: AccountBalanceListener? = null
+
+    fun setListener(listener: AccountBalanceListener) {
+        this.listener = listener
     }
 
     public fun init(){
@@ -98,6 +111,10 @@ class MyManager(private val appDatabase:AppDatabase, private val keyStore: KeySt
                         if (myAccount.balance != ethGetBalance.balance) {
                             myAccount.balance = ethGetBalance.balance
                             balanceString = ether.toString()
+
+                            if(listener != null){
+                                listener!!.accountBalance(myAccount.address, balanceString)
+                            }
 
                             async(CommonPool) { appDatabase.accountDao().upsertAccount(myAccount) }.await()
                         }

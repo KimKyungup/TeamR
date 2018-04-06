@@ -18,12 +18,29 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.samsung.hackerton18.teamr.belive.data.AppDatabase;
+
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 
 
 public class createContractActivity extends AppCompatActivity {
+    public MyManager myManager = null;
+    public AppDatabase appDatabase = null;
+
+    String result_action = null;
+
+    String result_eth = null;
+
+    String result_date = null;
+        String result_every_month = null;
+        String result_specific_day = null;
+    String result_time = null;
+    String result_location = null;
+
+    String result_to = null;
+
 
     Button transferButton;
     Button writeOnBlockButton;
@@ -182,6 +199,9 @@ public class createContractActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 resultText.setText("Transfer");
+
+                result_action="transfer";
+
                 changeInputLayout(INPUUT_LAYOUT.ADD_ETH_LAYOUT);
             }
         });
@@ -215,6 +235,8 @@ public class createContractActivity extends AppCompatActivity {
                     String eth = editEth.getText().toString();
                     addResultText(eth +" ETH");
 
+                    result_eth = eth;
+
                     InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                     return true;
@@ -227,7 +249,7 @@ public class createContractActivity extends AppCompatActivity {
         skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeInputLayout(INPUUT_LAYOUT.DONE_LAYOUT);
+                changeInputLayout(INPUUT_LAYOUT.TO_LAYOUT); //INPUUT_LAYOUT.DONE_LAYOUT);
             }
         });
 
@@ -263,6 +285,9 @@ public class createContractActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 addResultText("Every month on "+ dayOfMonth+"rd");
+
+                result_every_month = "Every month on "+ dayOfMonth+"rd";
+
                 changeInputLayout(INPUUT_LAYOUT.TO_LAYOUT);
             }
         };
@@ -280,6 +305,9 @@ public class createContractActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 addResultText(year +"-"+ monthOfYear +"-"+ dayOfMonth);
+
+                result_date = year +"-"+ monthOfYear +"-"+ dayOfMonth;
+
                 changeInputLayout(INPUUT_LAYOUT.TO_LAYOUT);
             }
         };

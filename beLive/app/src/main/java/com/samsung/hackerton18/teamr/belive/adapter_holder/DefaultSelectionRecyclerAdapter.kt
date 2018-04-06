@@ -12,6 +12,12 @@ class DefaultSelectionRecyclerAdapter(val context:Context)
     var list = listOf<String>()
     var displayList = listOf<String>()
 
+    private var listener: DefaultSelectionOnClickListener? = null
+
+    fun setListener(listener: DefaultSelectionOnClickListener) {
+        this.listener = listener
+    }
+
     override fun getItemCount() = displayList.size
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): DefaultSelectionViewHolder {
@@ -21,6 +27,21 @@ class DefaultSelectionRecyclerAdapter(val context:Context)
 
     override fun onBindViewHolder(holder: DefaultSelectionViewHolder, position: Int) {
         holder.bind(context, displayList[position])
+        holder.itemView.setOnClickListener {
+            if(listener != null) {
+                listener!!.defaultSelectionOnClick(position)
+            }
+        }
+
+        holder.itemView.setOnLongClickListener {
+            if(listener != null) {
+                listener!!.defaultSelectionOnLongClick(position)
+            }
+            else {
+                false
+            }
+        }
+
     }
 
     fun updateList(){

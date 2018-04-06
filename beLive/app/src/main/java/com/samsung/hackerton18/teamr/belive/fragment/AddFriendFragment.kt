@@ -1,12 +1,14 @@
 package com.samsung.hackerton18.teamr.belive.fragment
 
 
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import com.github.salomonbrys.kodein.LazyKodein
 import com.github.salomonbrys.kodein.android.appKodein
 import com.github.salomonbrys.kodein.instance
@@ -22,6 +24,9 @@ import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import org.jetbrains.anko.sdk25.coroutines.onClick
+
+
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -64,7 +69,10 @@ class AddFriendFragment : Fragment() {
 
             Snackbar.make(view!!, "New Friend is added.", Snackbar.LENGTH_LONG).setAction("Action", null).show()
 
+            val imm = (activity as MainActivity).getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0);
 
+            (activity as MainActivity).popFragment()
         }
     }
 }

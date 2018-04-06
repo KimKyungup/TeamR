@@ -1,7 +1,9 @@
 package com.samsung.hackerton18.teamr.belive.fragment
 
 
+import android.arch.lifecycle.Observer
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 //import android.app.Fragment
@@ -19,15 +21,23 @@ import kotlinx.android.synthetic.main.fragment_friend_list.*
 
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.DividerItemDecoration
+import com.samsung.hackerton18.teamr.belive.adapter_holder.DefaultSelectionOnClickListener
+import com.samsung.hackerton18.teamr.belive.data.friend.FriendEntity
 import com.samsung.hackerton18.teamr.belive.fragment.smartContract.TTS_ContractFragment
+import kotlinx.android.synthetic.main.fragment_add_friend.*
+import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.newFixedThreadPoolContext
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.jetbrains.anko.sdk25.coroutines.onClick
 
 
 /**
  * A simple [Fragment] subclass.
  */
-class FriendListFragment : Fragment() {
+class FriendListFragment : Fragment() , AnkoLogger, DefaultSelectionOnClickListener{
     private val appDatabase: AppDatabase by LazyKodein(appKodein).instance()
 
     lateinit var adapter : DefaultSelectionRecyclerAdapter
@@ -60,14 +70,34 @@ class FriendListFragment : Fragment() {
 //
 //    }
 
+    override fun defaultSelectionOnClick(idx:Int){
+        //Todo: CAll Edit Fragment
+        Snackbar.make(view!!, "Click ${idx} item.", Snackbar.LENGTH_LONG).setAction("Action", null).show()
+
+    }
+
+    override fun defaultSelectionOnLongClick(idx: Int): Boolean {
+        Snackbar.make(view!!, "Long Click ${idx} item.", Snackbar.LENGTH_LONG).setAction("Action", null).show()
+        async(UI){
+            async(CommonPool){
+                appDatabase.friendDao().deleteAcount(friendEntityList[idx])
+            }
+        }
+
+        return true
+    }
+
+    var friendEntityList = mutableListOf<FriendEntity>()
+
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity).supportActionBar?.subtitle = "FriendList"
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         adapter = DefaultSelectionRecyclerAdapter(context)
-        recycler_view.adapter = adapter
+        adapter.setListener(this)
 
+        recycler_view.adapter = adapter
         recycler_view.layoutManager = LinearLayoutManager(context)
 
         //Custom Divider -_-; failed.
@@ -84,14 +114,22 @@ class FriendListFragment : Fragment() {
             transaction.commit()
         }
 
-        var friendList = listOf("YongJae","NoKyung","LeeJu", "HyunJin")
-        //var clickListenerList = listOf("add", "KimKyungup","NoKyung","LeeJu", "HyunJin")
+        appDatabase.friendDao().loadAllLiveData().observe(this, Observer{
+            if(it != null){
+                info("Got new Friend List")
 
-        adapter.list = friendList
-        adapter.updateList()
-        adapter.notifyDataSetChanged()
+                val nameList = mutableListOf<String>()
 
+                for(friend in it){
+                    nameList.add(friend.name)
+                }
+                friendEntityList = it.toMutableList()
 
+                adapter.list = nameList
+                adapter.updateList()
+                adapter.notifyDataSetChanged()
+            }
+        })
     }
 
 }// Required empty public constructor

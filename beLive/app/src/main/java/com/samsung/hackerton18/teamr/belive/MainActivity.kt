@@ -30,6 +30,11 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.info
 import android.support.v4.app.Fragment
+import org.web3j.abi.datatypes.Bool
+import android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT
+import android.view.inputmethod.InputMethodManager
+
+
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, AnkoLogger {
@@ -204,7 +209,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 e.printStackTrace()
             }
         }
-//                val web3 = async(CommonPool){Web3jFactory.build(HttpService("https://rinkeby.infura.io/gGHwulfhVK8ouWn8aZMz"))}.await()
+/*//                val web3 = async(CommonPool){Web3jFactory.build(HttpService("https://rinkeby.infura.io/gGHwulfhVK8ouWn8aZMz"))}.await()
 //                val ethGetBalance = async(CommonPool){web3.ethGetBalance(myManager.myAccount.address, DefaultBlockParameterName.LATEST).sendAsync().get()}.await()
 //                val ether = Convert.fromWei(ethGetBalance.balance.toString(), Convert.Unit.ETHER)
 //
@@ -234,7 +239,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }.await()*/
 
 //            }
-//        }
+//        }*/
     }
     //<Show Fragments
 
@@ -252,6 +257,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         else{
             info("flagment can't replace itself")
         }
+    }
+
+    fun popFragment() : Boolean{
+        if (manager.backStackEntryCount > 1) {
+            manager.popBackStack();
+            return true
+        }
+        return false;
     }
 
 /*
@@ -349,23 +362,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            if (manager.backStackEntryCount > 1) {
-                manager.popBackStack();
-            } else {
+            if(!popFragment()){
                 alert(title="Exit App",message="Would you like to exit the app?"){
-
                     positiveButton("Yes"){
                         super.onBackPressed();
                     }
-
                     negativeButton("No"){
 
                     }
                 }.show()
-
             }
         }
     }
+
+    fun showSoftKeyboard(view: View) {
+        if (view.requestFocus()) {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm!!.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
+        }
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.

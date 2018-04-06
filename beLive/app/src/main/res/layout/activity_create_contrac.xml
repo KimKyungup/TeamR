@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/action_bar_activity_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <LinearLayout
+            android:id="@+id/contract"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="40dp"
+            android:background="#ffffff"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            >
+
+
+            <ImageView
+                android:id="@+id/titleImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/title" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="2dp"
+                android:background="#000000" />
+
+
+                <TextView
+                    android:id="@+id/result_text"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:gravity="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/current_step"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="I Want to"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="25sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="#000000" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:id="@+id/action_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+                    <Button
+                        android:id="@+id/transfer_button"
+                        android:textAllCaps="false"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:background="#34E2AE"
+                        android:font="@font/myriadpro_bold"
+                        android:text="Transfer"/>
+                    <Button
+                        android:id="@+id/write_on_block"
+                        android:textAllCaps="false"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:background="#34E2AE"
+                        android:font="@font/myriadpro_bold"
+                        android:text="Write on Block"/>
+                    <Button
+                        android:id="@+id/play_music_button"
+                        android:textAllCaps="false"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#34E2AE"
+                        android:font="@font/myriadpro_bold"
+                        android:text="Play Music"/>
+                    <Button
+                        android:id="@+id/turn_on_bulb_button"
+                        android:textAllCaps="false"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+
+
+                        android:layout_gravity="center"
+                        android:background="#34E2AE"
+                        android:font="@font/myriadpro_bold"
+                        android:text="Turn on Bulb"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/type_eth_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="invisible">
+                    <EditText
+                        android:id="@+id/edit_eth"
+                        android:layout_width="100dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:background="#34E2AE"
+                        android:inputType="number"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/condition_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="invisible">
+                    <Button
+                        android:id="@+id/skip_button"
+                        android:textAllCaps="false"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#ffffff"
+                        android:text="skip"/>
+                    <Button
+                        android:id="@+id/date_button"
+                        android:textAllCaps="false"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#34E2AE"
+                        android:text="date"/>
+                    <Button
+                        android:id="@+id/time_button"
+                        android:textAllCaps="false"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#34E2AE"
+                        android:text="time"/>
+                    <Button
+                        android:id="@+id/location_button"
+                        android:textAllCaps="false"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#34E2AE"
+                        android:text="location"/>
+                </LinearLayout>
+                <LinearLayout
+                android:id="@+id/date_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="invisible">
+                <Button
+                    android:id="@+id/cancel_date_button"
+                    android:textAllCaps="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:text="cancel"/>
+                <Button
+                    android:id="@+id/every_month_button"
+                    android:textAllCaps="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#34E2AE"
+                    android:text="every month till..."/>
+                <Button
+                    android:id="@+id/specific_date_button"
+                    android:textAllCaps="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#34E2AE"
+                    android:text="specific date"/>
+                </LinearLayout>
+                <LinearLayout
+                android:id="@+id/to_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="invisible">
+                <Button
+                    android:id="@+id/to_add_button"
+                    android:textAllCaps="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:text="add"/>
+                <Button
+                    android:id="@+id/to_mother_button"
+                    android:textAllCaps="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#34E2AE"
+                    android:text="mother"/>
+                <Button
+                    android:id="@+id/to_young_jae_button"
+                    android:textAllCaps="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#34E2AE"
+                    android:text="yong jae"/>
+                <Button
+                    android:id="@+id/to_kyung_up_button"
+                    android:textAllCaps="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#34E2AE"
+                    android:text="kyung up"/>
+                <Button
+                    android:id="@+id/to_kyung_tae_button"
+                    android:textAllCaps="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#34E2AE"
+                    android:text="kyung tae"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/done_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="invisible">
+                    <Button
+                        android:id="@+id/done_button"
+                        android:textAllCaps="false"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#34E2AE"
+                        android:text="done"/>
+                </LinearLayout>
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <!-- Custom Navigation View -->
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="false">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include
+                layout="@layout/nav_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </ScrollView>
+    </android.support.design.widget.NavigationView>
+
+    <!-- For Custom Navigation View
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer" />
+     -->
+
+</android.support.v4.widget.DrawerLayout>

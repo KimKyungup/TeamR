@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
@@ -181,8 +182,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         nav_create_contract.setOnClickListener {
+            val intent1 = Intent(this@MainActivity, createContractActivity::class.java)
+            startActivity(intent1)
             drawer_layout.closeDrawer(GravityCompat.START)
-            replaceFragment(NewContractFragment())  //showNewContractFragment()
+            //replaceFragment(NewContractFragment())  //showNewContractFragment()
         }
 
         nav_history.setOnClickListener {

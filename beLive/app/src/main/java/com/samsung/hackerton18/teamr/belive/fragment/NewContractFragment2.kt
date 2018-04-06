@@ -32,11 +32,17 @@ class NewContractFragment2 : android.support.v4.app.Fragment(), AnkoLogger {
         return inflater.inflate(R.layout.fragment_tts_contract, container, false)
     }
 
+    override fun onResume() {
+        super.onResume()
+        (activity as MainActivity).supportActionBar?.subtitle = "New Contract"
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as MainActivity).supportActionBar?.subtitle = "New Contract"
-        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        (activity as MainActivity).supportActionBar?.subtitle = "New Contract"
+//        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val mainString = "I Want to\nSend a Text"
         val subString = "Send a Text"
@@ -68,7 +74,7 @@ class NewContractFragment2 : android.support.v4.app.Fragment(), AnkoLogger {
 
             Snackbar.make(view!!, "Transaction is sent.", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show ()
-            (activity as MainActivity).showHistoryFragment()
+            (activity as MainActivity).replaceFragment(HistoryFragment())  //showHistoryFragment()
         }
     }
 

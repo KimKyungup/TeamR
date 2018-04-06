@@ -11,20 +11,18 @@ import android.view.ViewGroup
 
 import com.samsung.hackerton18.teamr.belive.R
 import android.text.Spannable
-import android.graphics.Color.parseColor
 import android.support.design.widget.Snackbar
 import android.text.style.BackgroundColorSpan
 import android.text.SpannableString
-import android.text.style.ForegroundColorSpan
 import com.github.salomonbrys.kodein.LazyKodein
 import com.github.salomonbrys.kodein.android.appKodein
 import com.github.salomonbrys.kodein.instance
 import com.samsung.hackerton18.teamr.belive.MainActivity
+import com.samsung.hackerton18.teamr.belive.fragment.HistoryFragment
 import com.samsung.hackerton18.teamr.belive.web3j.SmartContract
 import kotlinx.android.synthetic.main.fragment_tts_contract.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.sdk25.coroutines.onClick
-import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.toast
 
 
@@ -76,7 +74,7 @@ class TTS_ContractFragment : Fragment(), AnkoLogger {
 
             Snackbar.make(view!!, "Transaction is sent.", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show ()
-            (activity as MainActivity).showHistoryFragment()
+            (activity as MainActivity).replaceFragment(HistoryFragment())  //showHistoryFragment()
         }
     }
 

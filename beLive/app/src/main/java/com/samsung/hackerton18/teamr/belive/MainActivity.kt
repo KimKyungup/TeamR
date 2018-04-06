@@ -1,7 +1,5 @@
 package com.samsung.hackerton18.teamr.belive
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Observer
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -24,14 +22,15 @@ import kotlinx.android.synthetic.main.nav_main.*	//custom navigation
 import com.github.salomonbrys.kodein.LazyKodein
 import com.github.salomonbrys.kodein.android.appKodein
 import com.github.salomonbrys.kodein.instance
-import com.samsung.hackerton18.teamr.belive.data.account.AccountEntity
 import com.samsung.hackerton18.teamr.belive.fragment.smartContract.TTS_ContractFragment
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.delay
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.alert
 import org.jetbrains.anko.info
-import java.math.BigInteger
+import android.support.v4.app.Fragment
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, AnkoLogger {
     private val appDatabase: AppDatabase by LazyKodein(appKodein).instance()
@@ -76,7 +75,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 //        setCurrentAccountObserver()
 
-        showHistoryFragment()
+        //showHistoryFragment()
+        val transaction = manager.beginTransaction()
+        val fragment = HistoryFragment()
+        val backStateName = fragment.javaClass.name
+
+        transaction.add(R.id.fragmentHolder,fragment)
+        transaction.addToBackStack(fragment.javaClass.name)
+        transaction.commit()
+
 //        val transaction = manager.beginTransaction()
 //        val fragment = LogoFragment()
 //        transaction.replace(R.id.fragmentHolder,fragment)
@@ -141,29 +148,30 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         nav_create_contract.setOnClickListener {
-            showNewContractFragment()
             drawer_layout.closeDrawer(GravityCompat.START)
+            replaceFragment(NewContractFragment())  //showNewContractFragment()
         }
 
         nav_history.setOnClickListener {
-            showHistoryFragment()
             drawer_layout.closeDrawer(GravityCompat.START)
+            replaceFragment(HistoryFragment()) //showHistoryFragment()
+
         }
         nav_friend_list.setOnClickListener {
-            showFriendListFragment()
             drawer_layout.closeDrawer(GravityCompat.START)
+            replaceFragment(FriendListFragment())  //showFriendListFragment()
         }
         nav_my_account.setOnClickListener {
-            showMyAccountFragment()
             drawer_layout.closeDrawer(GravityCompat.START)
+            replaceFragment(MyAccountFragment())  //showMyAccountFragment()
         }
         nav_setting.setOnClickListener {
-            showSettingFragment()
             drawer_layout.closeDrawer(GravityCompat.START)
+            replaceFragment(SettingFragment())  //showSettingFragment()
         }
         nav_help.setOnClickListener {
-            showHelpFragment()
             drawer_layout.closeDrawer(GravityCompat.START)
+            replaceFragment(HelpFragment())  //showHelpFragment()
         }
 //        nav_debug.setOnClickListener {
 //            showSettingFragment()
@@ -229,6 +237,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 //        }
     }
     //<Show Fragments
+
+    fun replaceFragment(fragment: Fragment){
+        val transaction = manager.beginTransaction()
+        val newFragmentName = fragment.javaClass.name
+        val nowFragmentName = manager.getBackStackEntryAt(manager.backStackEntryCount - 1).name
+
+        if(!newFragmentName.equals(nowFragmentName)) {
+            transaction.replace(R.id.fragmentHolder, fragment)
+            transaction.addToBackStack(fragment.javaClass.name)
+            transaction.commit()
+            info("Replace Fragment")
+        }
+        else{
+            info("flagment can't replace itself")
+        }
+    }
+
+/*
     private fun showAccountFragment(){
         val transaction = manager.beginTransaction()
         val fragment = AccountFragment()
@@ -243,7 +269,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val fragment = NewContractFragment()
 
         transaction.replace(R.id.fragmentHolder,fragment)
-        transaction.addToBackStack(null)
+        transaction.addToBackStack(fragment.javaClass.name)
         transaction.commit()
     }
 
@@ -254,15 +280,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         transaction.replace(R.id.fragmentHolder,fragment)
         transaction.addToBackStack(null)
         transaction.commit()
+
     }
 
     fun showHistoryFragment(){
         val transaction = manager.beginTransaction()
         val fragment = HistoryFragment()
+        val newFragmentName = fragment.javaClass.name
+        //val fragmentPopped = manager.popBackStackImmediate(backStateName,0)
+        val nowFragmentName = manager.getBackStackEntryAt(manager.backStackEntryCount - 1).name
+        if(!newFragmentName.equals(nowFragmentName)) {
+            transaction.replace(R.id.fragmentHolder, fragment)
+            transaction.addToBackStack(fragment.javaClass.name)
+            transaction.commit()
+            info("Replace")
+        }
+        else{
+            info("Replace is blocked")
+        }
 
-        transaction.replace(R.id.fragmentHolder,fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
     }
 
     private fun showFriendListFragment(){
@@ -270,7 +306,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val fragment = FriendListFragment()
 
         transaction.replace(R.id.fragmentHolder,fragment)
-        transaction.addToBackStack(null)
+        transaction.addToBackStack(fragment.javaClass.name)
         transaction.commit()
     }
 
@@ -306,14 +342,28 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         transaction.replace(R.id.fragmentHolder,fragment)
         transaction.addToBackStack(null)
         transaction.commit()
-    }
+    }*/
     // Show Fragments>
 
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+            if (manager.backStackEntryCount > 1) {
+                manager.popBackStack();
+            } else {
+                alert(title="Exit App",message="Would you like to exit the app?"){
+
+                    positiveButton("Yes"){
+                        super.onBackPressed();
+                    }
+
+                    negativeButton("No"){
+
+                    }
+                }.show()
+
+            }
         }
     }
 

@@ -23,6 +23,12 @@ class HelpFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_help, container, false)
     }
 
+    override fun onResume() {
+        super.onResume()
+        (activity as MainActivity).supportActionBar?.subtitle = "Help"
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity).supportActionBar?.subtitle = "Help"

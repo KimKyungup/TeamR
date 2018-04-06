@@ -19,6 +19,9 @@ import kotlinx.android.synthetic.main.fragment_friend_list.*
 
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.DividerItemDecoration
+import com.samsung.hackerton18.teamr.belive.fragment.smartContract.TTS_ContractFragment
+import kotlinx.coroutines.experimental.newFixedThreadPoolContext
+import org.jetbrains.anko.sdk25.coroutines.onClick
 
 
 /**
@@ -27,11 +30,13 @@ import android.support.v7.widget.DividerItemDecoration
 class FriendListFragment : Fragment() {
     private val appDatabase: AppDatabase by LazyKodein(appKodein).instance()
 
-    private val adapter by lazy{
-        DefaultSelectionRecyclerAdapter(context).apply {
-            recycler_view.adapter = this
-        }
-    }
+    lateinit var adapter : DefaultSelectionRecyclerAdapter
+
+//    private val adapter by lazy{
+//        DefaultSelectionRecyclerAdapter(context).apply {
+//            recycler_view.adapter = this
+//        }
+//    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -39,10 +44,29 @@ class FriendListFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_friend_list, container, false)
     }
 
+//    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+//        super.setUserVisibleHint(isVisibleToUser)
+//        (activity as MainActivity).supportActionBar?.subtitle = "FriendList"
+//        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//
+//    }
+
+
+//    override fun onResume() {
+//        super.onResume()
+//        (activity as MainActivity).supportActionBar?.subtitle = "FriendList"
+//        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//
+//
+//    }
+
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity).supportActionBar?.subtitle = "FriendList"
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        adapter = DefaultSelectionRecyclerAdapter(context)
+        recycler_view.adapter = adapter
 
         recycler_view.layoutManager = LinearLayoutManager(context)
 
@@ -51,12 +75,23 @@ class FriendListFragment : Fragment() {
 //        itemDecorator.setDrawable(ContextCompat.getDrawable(activity, R.drawable.divider))
 //        recycler_view.addItemDecoration(DividerItemDecoration(activity,DividerItemDecoration.VERTICAL))
 
+        addBtn.onClick {
+            val transaction = (activity as MainActivity).manager.beginTransaction()
+            val fragment = AddFriendFragment()
 
-        var friendList = listOf("add", "KimKyungup","NoKyung","LeeJu", "HyunJin")
+            transaction.replace(R.id.fragmentHolder,fragment)
+            transaction.addToBackStack("Friendlist")
+            transaction.commit()
+        }
+
+        var friendList = listOf("YongJae","NoKyung","LeeJu", "HyunJin")
+        //var clickListenerList = listOf("add", "KimKyungup","NoKyung","LeeJu", "HyunJin")
 
         adapter.list = friendList
         adapter.updateList()
         adapter.notifyDataSetChanged()
+
+
     }
 
 }// Required empty public constructor

@@ -35,11 +35,12 @@ import android.support.v7.widget.DividerItemDecoration
 class HistoryFragment : Fragment(), AnkoLogger {
     private val appDatabase: AppDatabase by LazyKodein(appKodein).instance()
 
-    private val adapter by lazy{
-        SmartContractRecyclerAdapter(context , appDatabase = appDatabase).apply {
-            recycler_view.adapter = this
-        }
-    }
+    lateinit var adapter : SmartContractRecyclerAdapter
+//    private val adapter by lazy{
+//        SmartContractRecyclerAdapter(context , appDatabase = appDatabase).apply {
+//            recycler_view.adapter = this
+//        }
+//    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -47,13 +48,21 @@ class HistoryFragment : Fragment(), AnkoLogger {
         return inflater.inflate(R.layout.fragment_history, container, false)
     }
 
+    override fun onResume() {
+        super.onResume()
+//        (activity as MainActivity).supportActionBar?.subtitle = "History"
+    }
+
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         (activity as MainActivity).supportActionBar?.subtitle = "History"
-        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        //(activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         //<Recycleing View>
+        adapter = SmartContractRecyclerAdapter(context , appDatabase = appDatabase)
+        recycler_view.adapter = adapter
+
         recycler_view.layoutManager = LinearLayoutManager(context)
 
 //        val itemDecorator = DividerItemDecoration(activity, DividerItemDecoration.VERTICAL)

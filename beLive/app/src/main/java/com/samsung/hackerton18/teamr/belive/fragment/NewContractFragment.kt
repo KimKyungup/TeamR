@@ -6,12 +6,9 @@ import android.support.v4.app.Fragment //change     import android.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.github.salomonbrys.kodein.LazyKodein
-import com.github.salomonbrys.kodein.android.appKodein
-import com.github.salomonbrys.kodein.instance
 import com.samsung.hackerton18.teamr.belive.MainActivity
 import com.samsung.hackerton18.teamr.belive.R
-import com.samsung.hackerton18.teamr.belive.web3j.SmartContract
+import com.samsung.hackerton18.teamr.belive.fragment.smartContract.TTS_ContractFragment
 import kotlinx.android.synthetic.main.fragment_new_contract.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 
@@ -28,14 +25,20 @@ class NewContractFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_new_contract, container, false)
     }
 
+    override fun onResume() {
+        super.onResume()
+        (activity as MainActivity).supportActionBar?.subtitle = "New Contract"
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as MainActivity).supportActionBar?.subtitle = "New Contract"
-        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        (activity as MainActivity).supportActionBar?.subtitle = "New Contract"
+//        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         tts_contract.onClick {
-            (activity as MainActivity).showTTS_ContractFragment()
+            (activity as MainActivity).replaceFragment(TTS_ContractFragment())  //showTTS_ContractFragment()
         }
     }
 

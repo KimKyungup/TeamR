@@ -9,11 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.samsung.hackerton18.teamr.belive.R
-import android.content.ContentValues.TAG
 import com.samsung.hackerton18.teamr.belive.MainActivity
 import kotlinx.android.synthetic.main.fragment_logo.*
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import org.jetbrains.anko.sdk25.coroutines.onClick
 
 
@@ -31,7 +29,7 @@ class LogoFragment : Fragment() , AnkoLogger{
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         logo.onClick {
-            (activity as MainActivity).showHistoryFragment()
+            (activity as MainActivity).replaceFragment(HistoryFragment())  //.showHistoryFragment()
 
             val uiOptions = (activity as MainActivity).window.decorView.systemUiVisibility
             val newUiOptions = uiOptions xor  View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY

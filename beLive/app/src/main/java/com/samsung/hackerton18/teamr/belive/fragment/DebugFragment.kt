@@ -23,11 +23,14 @@ class DebugFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_debug, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun onResume() {
+        super.onResume()
         (activity as MainActivity).supportActionBar?.subtitle = "Debug"
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 
 }// Required empty public constructor
